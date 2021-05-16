@@ -1,8 +1,13 @@
 @extends('layouts.app')
+
 @section('styles')
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 @endsection
+
 @section('content')
-    <Login/>
+    <app-container/>
 @endsection
-@section('script')
+
+@section('scripts')
+    <script src="{{ asset('js/app.js') }}" defer></script>
 @endsection
