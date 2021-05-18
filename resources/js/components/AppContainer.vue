@@ -60,6 +60,7 @@
 
             <!-- If using vue-router 
             <router-view></router-view>-->
+            <router-view  />
           </v-container>
         </v-main>
 

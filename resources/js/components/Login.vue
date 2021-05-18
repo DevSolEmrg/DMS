@@ -1,5 +1,5 @@
 <template>
-    <div> Hello {{ message }} </div>
+    <div> LOGIN PAGE - Hello {{ message }} </div>
 </template>
 
 <script>
