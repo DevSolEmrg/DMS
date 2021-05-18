@@ -1,35 +1,36 @@
-export const routes = {
-    base: __dirname,
+export default {
+    base: '/',
     mode: 'history',
     routes: [
         {
             path: '*',
-            component: NotFound,
+            component: () => import('./components/NotFound'),
             name: 'NotFound'
         },
         {
-            path: __dirname,
-            component: AppContainer,
+            path: '/',
+            component: () => import('./components/AppContainer'),
+            redirect: { name: 'Login' },
             children: [
                 {
                     path: 'login',
-                    component: Login,
+                    component: () => import('./components/Login'),
                     name: 'Login',
                 },
                 {
-                    path: '',
-                    component: AuthContainer,
-                    beforeEnter: (to, from, next) => {
+                    path: '/user',
+                    component: () => import('./components/AuthContainer'),
+                    /*beforeEnter: (to, from, next) => {
                         axios.get('/api/authenticated').then(() => {
                             next()
                         }).catch(() => {
                             return next({ name: 'Login'})
                         });
-                    },
+                    },*/
                     children: [
                         {
                             path: 'dashboard',
-                            component: Dashboard,
+                            component: () => import('./components/general/Dashboard'),
                             name: 'Dashboard'
                         }
                     ]

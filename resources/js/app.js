@@ -13,7 +13,7 @@ import colors from 'vuetify/lib/util/colors'
 import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
-import { routes } from './routes'
+import  routes  from './routes'
 console.log("ewtwe", routes, 'ff',__dirname)
 
 //['1', '2'].array.forEach(plugins => Vue.use(plugins))
@@ -23,6 +23,7 @@ Vue.component('login-page', require('./components/Login').default);
 
 const app = new Vue({
     el: '#app',
+    router: new VueRouter(routes),
     vuetify: new Vuetify({
         theme: {
             dark: false,
