@@ -32,6 +32,11 @@ export default {
                             path: 'dashboard',
                             component: () => import('./components/general/Dashboard'),
                             name: 'Dashboard'
+                        },
+                        {
+                            path: 'dashboard2',
+                            component: () => import('./components/general/SamplePage'),
+                            name: 'Dashboard2'
                         }
                     ]
                 }
