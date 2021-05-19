@@ -4,12 +4,12 @@ export default {
     routes: [
         {
             path: '*',
-            component: () => import('./components/NotFound'),
+            component: () => import(/* webpackChunkName: "not_found" */ './components/NotFound'),
             name: 'NotFound'
         },
         {
             path: '/',
-            component: () => import('./components/AppContainer'),
+            component: () => import(/* webpackChunkName: "welcome_container" */ './components/AppContainer'),
             redirect: { name: 'Login' },
             children: [
                 {
@@ -19,7 +19,7 @@ export default {
                 },
                 {
                     path: '/user',
-                    component: () => import('./components/AuthContainer'),
+                    component: () => import(/* webpackChunkName: "container" */ './components/AuthContainer'),
                     /*beforeEnter: (to, from, next) => {
                         axios.get('/api/authenticated').then(() => {
                             next()
@@ -30,12 +30,12 @@ export default {
                     children: [
                         {
                             path: 'dashboard',
-                            component: () => import('./components/general/Dashboard'),
+                            component: () => import(/* webpackChunkName: "dashboard" */ './components/general/Dashboard'),
                             name: 'Dashboard'
                         },
                         {
                             path: 'dashboard2',
-                            component: () => import('./components/general/SamplePage'),
+                            component: () => import(/* webpackChunkName: "sample_page" */ './components/general/SamplePage'),
                             name: 'Dashboard2'
                         }
                     ]
