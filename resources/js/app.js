@@ -16,6 +16,8 @@ Vue.use(VueRouter)
 import  routes  from './routes'
 console.log("ewtwe", routes, 'ff',__dirname)
 
+import './validate'
+
 //['1', '2'].array.forEach(plugins => Vue.use(plugins))
 
 Vue.component('app-container', require('./components/AppContainer').default);
