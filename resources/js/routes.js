@@ -18,7 +18,12 @@ export default {
                     name: 'Login',
                 },
                 {
-                    path: '/user',
+                    path: 'guest',
+                    component: () => import('./components/Guest'),
+                    name: 'Guest',
+                },
+                {
+                    path: 'user',
                     component: () => import(/* webpackChunkName: "container" */ './components/AuthContainer'),
                     /*beforeEnter: (to, from, next) => {
                         axios.get('/api/authenticated').then(() => {
