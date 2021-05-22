@@ -4,7 +4,7 @@
         <v-main>
             <v-container fluid fill-height>
                 <v-layout class="align-center justify-center">
-                    <v-card width="400px">
+                    <v-card width="500px">
                         <v-toolbar color="primary" dark flat>
                             <v-toolbar-title>Login</v-toolbar-title>
                         </v-toolbar>
@@ -13,23 +13,40 @@
                                 <form @submit.prevent="submit">
                                     <validation-provider v-slot="{ errors }" name="email" rules="required|email">
                                         <v-text-field
+                                            class="mt-3"
                                             v-model="email"
                                             :error-messages="errors"
-                                            label="E-mail"
+                                            label="E-mail | Username"
                                             required
+                                            clear-icon="mdi-close-circle"
+                                            clearable
+                                            prepend-icon="mdi-account-circle"
+                                            filled
+                                            dense
                                         />
                                     </validation-provider>
-                                    <validation-provider v-slot="{ errors }" name="password" rules="required">
+                                    <validation-provider v-slot="{ errors }" name="password" rules="required|min:8">
                                         <v-text-field
+                                            class="mb-3"
                                             v-model="password"
-                                            type="password"
                                             :error-messages="errors"
                                             label="Password"
                                             required
+                                            clear-icon="mdi-close-circle"
+                                            clearable
+                                            prepend-icon="mdi-shield-key"
+                                            filled
+                                            dense
+                                            hint="At least 8 characters"
+                                            counter
+                                            :append-icon="show_pass ? 'mdi-eye' : 'mdi-eye-off'"
+                                            :type="show_pass ? 'text' : 'password'"
+                                            @click:append="show_pass = !show_pass"
                                         />
                                     </validation-provider>
                                     <v-card-actions>
                                         <v-row align="center" justify="end">
+                                            <v-btn class="mr-2" @click="guest" v-text="'guest area'"/>
                                             <v-btn class="mr-2" @click="clear" v-text="'clear'"/>
                                             <v-btn
                                                 color="primary"
@@ -37,7 +54,7 @@
                                                 :disabled="invalid"
                                                 justify="end"
                                                 @click="submit"
-                                                v-text="'submit'"
+                                                v-text="'login'"
                                             />
                                         </v-row>
                                     </v-card-actions>
@@ -60,15 +77,16 @@
       ValidationObserver,
     },
     data: () => ({
-      password: 'dsdgs',
+      password: 'dsdgsdsf',
       email: 'sdgsdg@gmail.com',
+      show_pass: false
     }),
 
     methods: {
       submit () {
         //this.$refs.observer.validate()
         console.log(this.$router)
-        this.$router.push({ path: "/user/dashboard" })
+        this.$router.push({ name: "Dashboard" })
         //this.$router.replace('/user/dashboard')
       },
       clear () {
@@ -76,6 +94,9 @@
         this.password = ''
         this.$refs.observer.reset()
       },
+      guest() {
+          this.$router.push({ name: "Guest" })
+      }
     },
   }
 </script>
