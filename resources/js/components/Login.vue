@@ -2,7 +2,7 @@
     <!--<div> LOGIN PAGE - Hello {{ message }} <router-link to="/user/dashboard">Dashboard</router-link> </div>-->
     <v-app>
         <v-main>
-            <v-container fluid fill-height>
+            <v-container fluid fill-height class="indigo lighten-5">
                 <v-layout class="align-center justify-center">
                     <v-card width="500px">
                         <v-toolbar color="primary" dark flat>
@@ -13,30 +13,28 @@
                                 <form @submit.prevent="submit">
                                     <validation-provider v-slot="{ errors }" name="email" rules="required|email">
                                         <v-text-field
-                                            class="mt-3"
+                                            class="mt-4"
                                             v-model="email"
                                             :error-messages="errors"
                                             label="E-mail | Username"
                                             required
                                             clear-icon="mdi-close-circle"
                                             clearable
-                                            prepend-icon="mdi-account-circle"
-                                            filled
-                                            dense
+                                            prepend-inner-icon="mdi-account-circle"
+                                            outlined
                                         />
                                     </validation-provider>
                                     <validation-provider v-slot="{ errors }" name="password" rules="required|min:8">
                                         <v-text-field
-                                            class="mb-3"
+                                            class="mb-4"
                                             v-model="password"
                                             :error-messages="errors"
                                             label="Password"
                                             required
                                             clear-icon="mdi-close-circle"
                                             clearable
-                                            prepend-icon="mdi-shield-key"
-                                            filled
-                                            dense
+                                            prepend-inner-icon="mdi-shield-key"
+                                            outlined
                                             hint="At least 8 characters"
                                             counter
                                             :append-icon="show_pass ? 'mdi-eye' : 'mdi-eye-off'"
