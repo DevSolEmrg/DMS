@@ -1,7 +1,7 @@
 <template>
     <v-app>
-        <v-navigation-drawer app style="background-color:green">
-          <!-- -->
+        <!--<v-navigation-drawer app style="background-color:green">
+           
           <div>hello</div>
           <div class="text-center">
             <v-dialog
@@ -43,11 +43,67 @@
               </v-card>
             </v-dialog>
           </div>
-        </v-navigation-drawer>
+        </v-navigation-drawer>-->
+        <v-navigation-drawer
+          app
+          permanent
+          left
+          v-model="drawer"
+          :mini-variant.sync="mini"
+          v-if="show_nav"
+        >
+          <template v-slot:prepend>
+            <v-list-item two-line>
+              <v-list-item-avatar class="my-0">
+                <img src="https://randomuser.me/api/portraits/women/81.jpg">
+              </v-list-item-avatar>
 
-        <v-app-bar app style="background-color:blue">
-          <!-- -->
+              <v-list-item-content>
+                <v-list-item-title>Jane Smith</v-list-item-title>
+                <v-list-item-subtitle>Logged In</v-list-item-subtitle>
+              </v-list-item-content>
+
+              <v-btn
+                icon
+                @click.stop="mini = !mini"
+              >
+                <v-icon>mdi-chevron-left</v-icon>
+              </v-btn>
+
+            </v-list-item>
+          </template>
+
+          <v-divider/>
+
+          <v-list dense>
+            <v-list-item
+              v-for="item in items"
+              :key="item.title"
+            >
+              <v-list-item-icon>
+                <v-icon>{{ item.icon }}</v-icon>
+              </v-list-item-icon>
+
+              <v-list-item-content>
+                <v-list-item-title>{{ item.title }}</v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </v-list>
+        </v-navigation-drawer>
+        
+
+        <!--<v-app-bar app style="background-color:blue">
           <div>hello</div>
+        </v-app-bar>-->
+        <v-app-bar
+          color="primary"
+          dark
+          app
+          style="height:64px"
+        >
+          <v-app-bar-nav-icon @click.stop="navVisibility"></v-app-bar-nav-icon>
+
+          <v-toolbar-title>Title</v-toolbar-title>
         </v-app-bar>
 
         <!-- Sizes your content based upon application components -->
@@ -64,8 +120,8 @@
           </v-container>
         </v-main>
 
-        <v-footer app  style="background-color:violet">
-          <div>hello</div>
+        <v-footer app  class="indigo lighten-5" dense>
+          <h6>All Right Reserve @c-2021</h6>
           <!-- -->
         </v-footer>
     </v-app>
@@ -76,7 +132,24 @@
     data () {
       return {
         dialog: false,
+        drawer: null,
+        mini: false,
+        show_nav: true,
+        items: [
+          { title: 'Home', icon: 'mdi-home-city' },
+          { title: 'My Account', icon: 'mdi-account' },
+          { title: 'Users', icon: 'mdi-account-group-outline' },
+        ],
       }
     },
+    methods: {
+      navVisibility() {
+        if (this.mini && this.show_nav) {
+          this.mini = false
+        } else {
+          this.show_nav = !this.show_nav
+        }
+      }
+    }
   }
 </script>
