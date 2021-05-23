@@ -89,6 +89,19 @@
               </v-list-item-content>
             </v-list-item>
           </v-list>
+
+          <template v-slot:append>
+            <div class="pa-2">
+              <v-btn block class="error" v-if="!mini">
+                <v-icon left>mdi-logout</v-icon>
+                Logout
+              </v-btn>
+              <v-btn block class="error" v-else icon elevation="4">
+                <v-icon>mdi-logout</v-icon>
+              </v-btn>
+            </div>
+          </template>
+
         </v-navigation-drawer>
         
 
