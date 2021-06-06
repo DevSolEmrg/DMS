@@ -17,15 +17,17 @@
             </template>
             <v-divider/>
             <v-list dense>
-                <v-list-item v-for="item in items" :key="item.title">
-                    <v-list-item-icon>
-                        <v-icon>{{ item.icon }}</v-icon>
-                    </v-list-item-icon>
+                <v-list-item-group v-model="selectedItem" color="primary">
+                    <v-list-item v-for="item in items" :key="item.title">
+                        <v-list-item-icon>
+                            <v-icon>{{ item.icon }}</v-icon>
+                        </v-list-item-icon>
 
-                    <v-list-item-content>
-                        <v-list-item-title>{{ item.title }}</v-list-item-title>
-                    </v-list-item-content>
-                </v-list-item>
+                        <v-list-item-content>
+                            <v-list-item-title>{{ item.title }}</v-list-item-title>
+                        </v-list-item-content>
+                    </v-list-item>
+                </v-list-item-group>
             </v-list>
             <template v-slot:append>
                 <div class="pa-2">
@@ -70,6 +72,7 @@
                     { title: 'My Account', icon: 'mdi-account' },
                     { title: 'Users', icon: 'mdi-account-group-outline' },
                 ],
+                selectedItem: 0,
             }
         },
         methods: {
