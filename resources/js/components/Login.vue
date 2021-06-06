@@ -96,6 +96,10 @@
           this.$router.push({ name: "Guest" })
       }
     },
+    mounted() {
+        console.log('mounted sa login:', this.$store.state.users.user_name)
+        //console.log(localStorage.getItem('secudata'))
+    }
   }
 </script>
 
