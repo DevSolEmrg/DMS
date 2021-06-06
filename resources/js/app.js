@@ -13,12 +13,17 @@ import colors from 'vuetify/lib/util/colors'
 import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
+//Vuex
+import store from './store/index'
+import Vuex from 'vuex'
+Vue.use(Vuex)
+
 import  routes  from './routes'
 console.log("ewtwe", routes, 'ff',__dirname)
 
 import './validate'
 
-//['1', '2'].array.forEach(plugins => Vue.use(plugins))
+//['Vuetify', 'VueRouter'].forEach(plugins => Vue.use(plugins))
 
 Vue.component('app-container', require('./components/AppContainer').default);
 Vue.component('login-page', require('./components/Login').default);
@@ -31,7 +36,7 @@ const app = new Vue({
             dark: false,
             themes: {
               light: {
-                primary: colors.blue,
+                primary: colors.blue.darken1,
                 secondary: colors.grey.darken1,
                 accent: colors.shades.black,
                 error: colors.red.accent3,
@@ -42,4 +47,5 @@ const app = new Vue({
             },
         },
     }),
+    store: new Vuex.Store(store)
 })
