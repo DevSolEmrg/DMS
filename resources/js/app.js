@@ -10,8 +10,8 @@ Vue.use(Vuetify);
 import colors from 'vuetify/lib/util/colors'
 //End
 
-import VueRouter from 'vue-router'
-Vue.use(VueRouter)
+//import VueRouter from 'vue-router'
+//Vue.use(VueRouter)
 
 //Vuex
 import store from './store/index'
@@ -19,7 +19,7 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 import  routes  from './routes'
-console.log("ewtwe", routes, 'ff',__dirname)
+//console.log("ewtwe", routes, 'ff',__dirname)
 
 import './validate'
 
@@ -30,7 +30,7 @@ Vue.component('login-page', require('./components/Login').default);
 
 const app = new Vue({
     el: '#app',
-    router: new VueRouter(routes),
+    router: routes,
     vuetify: new Vuetify({
         theme: {
             dark: false,

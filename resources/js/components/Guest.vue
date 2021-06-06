@@ -17,6 +17,9 @@ export default {
         loginPage() {
             this.$router.push({ name: "Login" })
         }
+    },
+    mounted() {
+        //console.log(localStorage.getItem('sample_key'))
     }
 
 }

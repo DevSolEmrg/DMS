@@ -1,4 +1,8 @@
-export default {
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+Vue.use(VueRouter)
+
+const routes = new VueRouter({
     base: '/',
     mode: 'history',
     routes: [
@@ -16,11 +20,17 @@ export default {
                     path: 'login',
                     component: () => import('./components/Login'),
                     name: 'Login',
+                    meta: {
+                        auth: false
+                    }
                 },
                 {
                     path: 'guest',
                     component: () => import('./components/Guest'),
                     name: 'Guest',
+                    meta: {
+                        auth: false
+                    }
                 },
                 {
                     path: 'user',
@@ -32,6 +42,9 @@ export default {
                             return next({ name: 'Login'})
                         });
                     },*/
+                    meta: {
+                        auth: true
+                    },
                     children: [
                         {
                             path: 'dashboard',
@@ -48,4 +61,16 @@ export default {
             ]
         }
     ]
-}
+})
+
+/*routes.beforeEach((to, from, next) => {
+    console.log("==", to)
+    next()
+})*/
+
+/*routes.beforeEach((to, from, next) => {
+    console.log("==", to)
+    next()
+})*/
+
+export default routes

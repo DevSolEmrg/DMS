@@ -83,7 +83,7 @@
     methods: {
       submit () {
         //this.$refs.observer.validate()
-        console.log(this.$router)
+        //console.log(this.$router)
         this.$router.push({ name: "Dashboard" })
         //this.$router.replace('/user/dashboard')
       },
@@ -99,6 +99,8 @@
     mounted() {
         console.log('mounted sa login:', this.$store.state.users.user_name)
         //console.log(localStorage.getItem('secudata'))
+        //localStorage.setItem("sample_key", 'sample here')
+        //console.log(localStorage)
     }
   }
 </script>
