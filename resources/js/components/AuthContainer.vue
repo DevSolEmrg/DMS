@@ -4,7 +4,8 @@
             <template v-slot:prepend>
                 <v-list-item two-line>
                     <v-list-item-avatar class="my-0">
-                        <img src="https://randomuser.me/api/portraits/women/81.jpg">
+                        <!--<img src="https://randomuser.me/api/portraits/women/81.jpg">-->
+                        <img :src="profilePic">
                     </v-list-item-avatar>
                     <v-list-item-content>
                         <v-list-item-title>Jane Smith</v-list-item-title>
@@ -73,6 +74,11 @@
                     { title: 'Users', icon: 'mdi-account-group-outline' },
                 ],
                 selectedItem: 0,
+            }
+        },
+        computed: {
+            profilePic() {
+                return location.origin + '/image/profile.jpg'
             }
         },
         methods: {
