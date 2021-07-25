@@ -14,27 +14,43 @@ const routes = new VueRouter({
         {
             path: '/',
             component: () => import(/* webpackChunkName: "welcome_container" */ './components/AppContainer'),
-            redirect: { name: 'Login' },
+            //redirect: { name: 'Login' },
             children: [
                 {
-                    path: 'login',
-                    component: () => import('./components/Login'),
-                    name: 'Login',
+                    path: '',
+                    component: () => import(/* webpackChunkName: "public_container" */ './components/PublicContainer'),
+                    /*beforeEnter: (to, from, next) => {
+                        axios.get('/api/authenticated').then(() => {
+                            next()
+                        }).catch(() => {
+                            return next({ name: 'Login'})
+                        });
+                    },*/
                     meta: {
-                        auth: false
-                    }
+                        auth: true
+                    },
+                    children: [
+                        {
+                            path: '',
+                            component: () => import('./components/Login'),
+                            name: 'Login',
+                            meta: {
+                                auth: false
+                            }
+                        },
+                        {
+                            path: 'guest',
+                            component: () => import('./components/Guest'),
+                            name: 'Guest',
+                            meta: {
+                                auth: false
+                            }
+                        },
+                    ]
                 },
                 {
-                    path: 'guest',
-                    component: () => import('./components/Guest'),
-                    name: 'Guest',
-                    meta: {
-                        auth: false
-                    }
-                },
-                {
-                    path: 'user',
-                    component: () => import(/* webpackChunkName: "container" */ './components/AuthContainer'),
+                    path: '',
+                    component: () => import(/* webpackChunkName: "auth_container" */ './components/AuthContainer'),
                     /*beforeEnter: (to, from, next) => {
                         axios.get('/api/authenticated').then(() => {
                             next()
