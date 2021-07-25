@@ -24,7 +24,7 @@
                                             outlined
                                         />
                                     </validation-provider>
-                                    <validation-provider v-slot="{ errors }" name="password" rules="required|min:8">
+                                    <validation-provider v-slot="{ errors }" name="password" rules="required|min:4">
                                         <v-text-field
                                             class="mb-4"
                                             v-model="password"
@@ -51,7 +51,7 @@
                                                 type="submit"
                                                 :disabled="invalid"
                                                 justify="end"
-                                                @click="submit"
+                                                @click="submitRedirect"
                                                 v-text="'login'"
                                             />
                                         </v-row>
@@ -82,10 +82,27 @@
 
     methods: {
       submit () {
-        //this.$refs.observer.validate()
+        this.$refs.observer.validate()
         //console.log(this.$router)
-        this.$router.push({ name: "Dashboard" })
+        //this.$router.push({ name: "Dashboard" })
         //this.$router.replace('/user/dashboard')
+      },
+      submitRedirect() {
+          axios.get("/sanctum/csrf-cookie").then(res => {
+              console.log('sanc:', res)
+              //const token = "1|Hpa02sdRRQps2AqEqx4iMXSQ5zsYwbWDkMC5gARg";
+              const token = "06c589ebbef592057f942f5a76be12cdd3fd0dd5cc907aab0a5dabe2fede58af";
+              axios.post('/api/login', {email: this.email, password: this.password}, { headers: { Authorization: 'Bearer' + token, 'Content-Type': 'application/json' } }).then(response => {
+                  console.log("LOGIN RESPONSE:", response);
+                  this.$router.push({ name: "Dashboard" })
+              }).catch(error=>{
+                  console.log('error:', error)
+              }).then(done=>{
+                  console.log('then2:', done)
+              })
+            
+            //this.$router.push({ name: "Dashboard" })
+          });
       },
       clear () {
         this.email = ''
