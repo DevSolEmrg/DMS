@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    <app-container/>
+    <router-view />
 @endsection
 
 @section('scripts')

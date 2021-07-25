@@ -89,6 +89,12 @@
                     this.show_nav = !this.show_nav
                 }
             }
+        },
+        mounted() {
+            /*setTimeout(() => {
+                console.log('ds')
+                this.$router.push({ name: 'Login'});
+            }, 10000);*/
         }
     }
 </script>
