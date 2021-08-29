@@ -1,12 +1,11 @@
 import axios from "axios";
 
 const state = {
-    user_name: 'mark agbjksfalskf asgasjkgbklakslglkasg asglkashglkash',
-    auth: []
+    auth: null,
+    authenticated: false
 };
 
 const getters = {
-    user_name: state => state.user_name,
     auth: state => state.auth,
 };
 
@@ -18,10 +17,12 @@ const mutations = {
         try {
             var token = auth.token
             state.auth = {...auth.user, token}
-        } catch (error) { state.auth = []; }
+            state.authenticated = true
+        } catch (error) { state.auth = null; state.authenticated = false; }
     },
     UNSET_AUTH: (state) => {
-        state.auth = []
+        state.auth = null
+        state.authenticated = false
     },
 };
 
