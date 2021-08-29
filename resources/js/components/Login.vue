@@ -75,8 +75,8 @@
       ValidationObserver,
     },
     data: () => ({
-      password: 'dsdgsdsf',
-      email: 'sdgsdg@gmail.com',
+      password: 'password',
+      email: 'johndoe@gmail.com',
       show_pass: false
     }),
 
@@ -94,13 +94,14 @@
               const token = "06c589ebbef592057f942f5a76be12cdd3fd0dd5cc907aab0a5dabe2fede58af";
               axios.post('/api/login', {email: this.email, password: this.password}, { headers: { Authorization: 'Bearer' + token, 'Content-Type': 'application/json' } }).then(response => {
                   console.log("LOGIN RESPONSE:", response);
+                  this.$store.commit('SET_AUTH', response.data)
                   this.$router.push({ name: "Dashboard" })
               }).catch(error=>{
                   console.log('error:', error)
               }).then(done=>{
                   console.log('then2:', done)
               })
-            
+
             //this.$router.push({ name: "Dashboard" })
           });
       },
@@ -114,7 +115,7 @@
       }
     },
     mounted() {
-        console.log('mounted sa login:', this.$store.state.users.user_name)
+        //console.log('mounted sa login:', this.$store.state.users.user_name)
         //console.log(localStorage.getItem('secudata'))
         //localStorage.setItem("sample_key", 'sample here')
         //console.log(localStorage)

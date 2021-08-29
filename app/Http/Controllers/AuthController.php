@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
@@ -38,6 +39,9 @@ class AuthController extends Controller
             'password' => 'required|string'
         ]);
 
+        //manual login user
+        Auth::attempt($fields);
+
         $user = User::where('email', $fields['email'])->first();
 
         if (!$user || !Hash::check($fields['password'], $user->password)) {
@@ -58,6 +62,8 @@ class AuthController extends Controller
 
     public function logout(Request $request) {
         auth()->user()->tokens()->delete();
+
+        Auth::guard('web')->logout();
 
         return [
             'message' => 'Logged out'

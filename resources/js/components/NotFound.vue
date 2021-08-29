@@ -8,7 +8,7 @@
                         <v-icon left dark> mdi-keyboard-backspace </v-icon> Back
                     </v-btn>
                     <h3><span style="color:red">404 ERROR</span> - Page Not Found</h3>
-                        
+
                 </v-layout>
             </v-container>
         </v-main>
@@ -20,7 +20,7 @@
 export default {
     methods: {
         goBack() {
-            this.$router.push({ path: '/'});
+            this.$router.go(-1)
         }
     }
 }
