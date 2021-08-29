@@ -1,6 +1,6 @@
 <template>
   <div>sample page lang to
-    <router-link to="/user/dashboard">Dashboard 1</router-link>
+    <router-link to="/dashboard">Dashboard 1</router-link>
   </div>
 </template>
 
