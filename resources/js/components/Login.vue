@@ -115,7 +115,7 @@
       }
     },
     mounted() {
-        console.log('mounted sa login:', this.$store.state.users.user_name)
+        //console.log('mounted sa login:', this.$store.state.users.user_name)
         //console.log(localStorage.getItem('secudata'))
         //localStorage.setItem("sample_key", 'sample here')
         //console.log(localStorage)

@@ -15,7 +15,7 @@ import createPersistedState from "vuex-persistedstate";
 //     encryptionSecret: `@210012~-%${Math.random().toString(36).slice(2)}%`,
 // });
 
-import users from "./modules/users";
+import user from "./modules/user";
 
 
 //Vue.use(Vuex)
@@ -23,7 +23,7 @@ import users from "./modules/users";
 const store = {
     modules: {
         strict: process.env.NODE_ENV !== "production",
-        users
+        user
     },
     plugins: [
         createPersistedState({
@@ -34,11 +34,11 @@ const store = {
             //     removeItem: (key) => ls.remove(key),
             // },
             key: 'meta',
-            reducer (val) {
-                if (!val.users.auth) {
-                    return []
+            reducer (meta) {
+                if (!meta.user.auth || !meta.user.authenticated) {
+                    return null
                 }
-                return val
+                return meta
             },
             storage: localStorage
         }),
