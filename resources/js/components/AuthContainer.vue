@@ -32,17 +32,17 @@
             </v-list>
             <template v-slot:append>
                 <div class="pa-2">
-                    <v-btn block class="error" v-if="!mini">
+                    <v-btn block class="error" v-if="!mini" @click="logout">
                         <v-icon left>mdi-logout</v-icon>
                         Logout
                     </v-btn>
-                    <v-btn block class="error" v-else icon elevation="4">
+                    <v-btn block class="error" v-else icon elevation="4" @click="logout">
                         <v-icon>mdi-logout</v-icon>
                     </v-btn>
                 </div>
             </template>
         </v-navigation-drawer>
-        
+
         <v-app-bar color="primary" dark app style="height:64px">
             <v-app-bar-nav-icon @click.stop="navVisibility"/>
             <v-toolbar-title>Title</v-toolbar-title>
@@ -88,9 +88,19 @@
                 } else {
                     this.show_nav = !this.show_nav
                 }
+            },
+            logout() {
+                axios.post('/api/logout', { headers: { Authorization: 'Bearer' + this.$store?.state?.users?.auth?.token, 'Content-Type': 'application/json' } }).then(response => {
+                    this.$store.commit("UNSET_AUTH")
+                    localStorage.removeItem("meta");
+                    this.$router.replace({ name: "Login" })
+                }).catch(error=>{
+                    console.log('error in logout:', error)
+                })
             }
         },
         mounted() {
+            console.log('store:::', this.$store.state)
             /*setTimeout(() => {
                 console.log('ds')
                 this.$router.push({ name: 'Login'});
