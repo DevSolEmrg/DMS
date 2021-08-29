@@ -18,7 +18,7 @@ const routes = new VueRouter({
             children: [
                 {
                     path: '',
-                    component: () => import(/* webpackChunkName: "public_container" */ './components/PublicContainer'),
+                    component: () => import(/* webpackChunkName: "quest_container" */ './components/GuestContainer'),
                     /*beforeEnter: (to, from, next) => {
                         axios.get('/api/authenticated').then(() => {
                             next()
@@ -26,25 +26,17 @@ const routes = new VueRouter({
                             return next({ name: 'Login'})
                         });
                     },*/
-                    meta: {
-                        auth: true
-                    },
+                    meta: { isGuest: true },
                     children: [
                         {
                             path: '',
                             component: () => import('./components/Login'),
                             name: 'Login',
-                            meta: {
-                                auth: false
-                            }
                         },
                         {
                             path: 'guest',
                             component: () => import('./components/Guest'),
                             name: 'Guest',
-                            meta: {
-                                auth: false
-                            }
                         },
                     ]
                 },
@@ -58,9 +50,7 @@ const routes = new VueRouter({
                             return next({ name: 'Login'})
                         });
                     },*/
-                    meta: {
-                        auth: true
-                    },
+                    meta: { isAuth: true },
                     children: [
                         {
                             path: 'dashboard',
@@ -78,6 +68,24 @@ const routes = new VueRouter({
         }
     ]
 })
+
+function sessionAlive() {
+    if(localStorage?.meta) {
+        let user = JSON.parse(window.localStorage?.meta)?.user
+        return user?.authenticated && user?.auth;
+    }
+    return false;
+};
+
+routes.beforeEach((to, from, next) => {
+    if (to.matched.some(record => record.meta.isAuth)) {
+        return !sessionAlive() ? next({ name: 'Login' }) : next()
+    } else if (to.matched.some(record => record.meta.isGuest)) {
+        return sessionAlive() ? next({ name: 'Dashboard' }) : next()
+    } else {
+        return next()
+    }
+});
 
 /*routes.beforeEach((to, from, next) => {
     console.log("==", to)
